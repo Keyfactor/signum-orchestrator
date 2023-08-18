@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
 using SignumReference;
-using System.ServiceModel.Dispatcher;
+using System.IO;
 
 namespace Keyfactor.Extensions.Orchestrator.Signum
 {
@@ -15,7 +14,7 @@ namespace Keyfactor.Extensions.Orchestrator.Signum
     {
         private string EndpointURL { get; set; }
         private string UserId { get; set; }
-        private string Password { get; set; }
+        private string UserPassword { get; set; }
 
         private RTAdminServiceClient Client { get; set; }
 
@@ -23,12 +22,12 @@ namespace Keyfactor.Extensions.Orchestrator.Signum
         {
             EndpointURL = endpointURL;
             UserId = userId;
-            Password = password;
+            UserPassword = password;
 
             InitializeSoapClient();
         }
 
-        private List<int> GetCertificateIds()
+        internal List<int> GetCertificateIds()
         {
             List<int> certificateIds = new List<int>();
             var result = Task.Run(async () => await Client.ListCertificateIdsAsync(CertificatesViewType.ViewAll, String.Empty, null, null)).Result;
@@ -38,10 +37,28 @@ namespace Keyfactor.Extensions.Orchestrator.Signum
             }
             else
             {
-                throw new SignumException(result.ResultMessage)
+                throw new SignumException(result.ResultMessage);
             }
 
             return certificateIds;
+        }
+
+        internal X509Certificate2 GetCertificate(int id)
+        {
+            X509Certificate2 certificate = null;
+            var result = Task.Run(async () => await Client.DownloadCertificatePublicPartAsync(id)).Result;
+
+            Stream stream = new MemoryStream();
+            Task.Run(async () => await result.stream.CopyToAsync(stream));
+
+            using (BinaryReader br = new BinaryReader(stream))
+            {
+                stream.Position = 0;
+                byte[] b = br.ReadBytes((int)stream.Length);
+                certificate = new X509Certificate2(b);
+            }
+
+            return certificate;
         }
 
         private void InitializeSoapClient()
@@ -69,6 +86,8 @@ namespace Keyfactor.Extensions.Orchestrator.Signum
             binding.Elements.Add(httpsTrans);
 
             Client = new RTAdminServiceClient(binding, new EndpointAddress(EndpointURL));
+            Client.ClientCredentials.UserName.UserName = UserId;
+            Client.ClientCredentials.UserName.Password = UserPassword;
         }
     }
 }

@@ -18,7 +18,7 @@
         "supportsManagementAdd": false,
         "supportsManagementRemove": false,
         "supportsReenrollment": false,
-        "supportsInventory": false
+        "supportsInventory": true
       },
       "linux": {
         "supportsCreateStore": false,
@@ -26,7 +26,7 @@
         "supportsManagementAdd": false,
         "supportsManagementRemove": false,
         "supportsReenrollment": false,
-        "supportsInventory": false
+        "supportsInventory": true
       },
       "store_types": [
         {
