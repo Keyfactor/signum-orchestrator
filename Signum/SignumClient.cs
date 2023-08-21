@@ -49,7 +49,7 @@ namespace Keyfactor.Extensions.Orchestrator.Signum
             var result = Task.Run(async () => await Client.DownloadCertificatePublicPartAsync(id)).Result;
 
             Stream stream = new MemoryStream();
-            Task.Run(async () => await result.stream.CopyToAsync(stream));
+            result.stream.CopyToAsync(stream);
 
             using (BinaryReader br = new BinaryReader(stream))
             {

@@ -18,6 +18,11 @@ namespace Keyfactor.Extensions.Orchestrator.Signum
 
         public IPAMSecretResolver _resolver;
 
+        public Inventory(IPAMSecretResolver resolver)
+        {
+            _resolver = resolver;
+        }
+
         public JobResult ProcessJob(InventoryJobConfiguration config, SubmitInventoryUpdate submitInventory)
         {
             ILogger logger = LogHandler.GetClassLogger(this.GetType());
@@ -54,17 +59,20 @@ namespace Keyfactor.Extensions.Orchestrator.Signum
             catch (Exception ex)
             {
                 logger.LogError($"Exception for {config.Capability}: {SignumException.FlattenExceptionMessages(ex, string.Empty)} for job id {config.JobId}");
-                return new JobResult() { Result = Keyfactor.Orchestrators.Common.Enums.OrchestratorJobStatusJobResult.Failure, JobHistoryId = config.JobHistoryId, FailureMessage = "Custom message you want to show to show up as the error message in Job History in KF Command" };
+                return new JobResult() { Result = OrchestratorJobStatusJobResult.Failure, JobHistoryId = config.JobHistoryId, FailureMessage = SignumException.FlattenExceptionMessages(ex, $"Server {config.CertificateStoreDetails.ClientMachine}:") };
             }
 
             try
             {
                 submitInventory.Invoke(inventoryItems);
-                return new JobResult() { Result = Keyfactor.Orchestrators.Common.Enums.OrchestratorJobStatusJobResult.Success, JobHistoryId = config.JobHistoryId };
+                logger.LogDebug($"...End {config.Capability} job for job id {config.JobId}");
+                return new JobResult() { Result = OrchestratorJobStatusJobResult.Success, JobHistoryId = config.JobHistoryId };
             }
             catch (Exception ex)
             {
-                return new JobResult() { Result = Keyfactor.Orchestrators.Common.Enums.OrchestratorJobStatusJobResult.Failure, JobHistoryId = config.JobHistoryId, FailureMessage = "Custom message you want to show to show up as the error message in Job History in KF Command" };
+                string errorMessage = SignumException.FlattenExceptionMessages(ex, string.Empty);
+                logger.LogError($"Exception returning certificates for {config.Capability}: {errorMessage} for job id {config.JobId}");
+                return new JobResult() { Result = OrchestratorJobStatusJobResult.Failure, JobHistoryId = config.JobHistoryId, FailureMessage = SignumException.FlattenExceptionMessages(ex, $"Server {config.CertificateStoreDetails.ClientMachine}:") };
             }
         }
     }
