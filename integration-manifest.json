@@ -30,35 +30,18 @@
       },
       "store_types": [
         {
-          "Name": "MyOrchestratorStoreType",
-          "ShortName": "MOST",
-          "Capability": "MOST",
+          "Name": "Signum",
+          "ShortName": "Signum",
+          "Capability": "Signum",
           "LocalStore": false,
           "SupportedOperations": {
             "Add": false,
             "Create": false,
-            "Discovery": true,
+            "Discovery": false,
             "Enrollment": false,
             "Remove": false
           },
-          "Properties": [
-            {
-              "Name": "CustomField1",
-              "DisplayName": "CustomField1",
-              "Type": "String",
-              "DependsOn": "",
-              "DefaultValue": "default",
-              "Required": true
-            },
-            {
-              "Name": "CustomField2",
-              "DisplayName": "CustomField2",
-              "Type": "String",
-              "DependsOn": "",
-              "DefaultValue": null,
-              "Required": true
-            }
-          ],
+          "Properties": [],
           "EntryParameters": [],
           "PasswordOptions": {
             "EntrySupported": false,
@@ -66,8 +49,8 @@
             "Style": "Default"
           },
           "StorePathType": "",
-          "StorePathValue": "",
-          "PrivateKeyAllowed": "Forbidden",
+          "StorePathValue": "na",
+          "PrivateKeyAllowed": "Required",
           "JobProperties": [],
           "ServerRequired": true,
           "PowerShell": false,
