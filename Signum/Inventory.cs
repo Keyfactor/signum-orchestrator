@@ -50,7 +50,7 @@ namespace Keyfactor.Extensions.Orchestrator.Signum
                     {
                         ItemStatus = OrchestratorInventoryItemStatus.Unknown,
                         Alias = id.ToString(),
-                        //PrivateKeyEntry = issuedCertificate.HasPrivateKey,
+                        PrivateKeyEntry = true,
                         UseChainLevel = false,
                         Certificates = new List<string>() { Convert.ToBase64String(client.GetCertificate(id).Export(X509ContentType.Cert)) }
                     });
