@@ -51,9 +51,8 @@ The secrets that this orchestrator extension supports for use with a PAM Provide
 
 |Name|Description|
 |----|-----------|
-|ServerUsername|The user id that will be used to authenticate into the server hosting the store|
-|ServerPassword|The password that will be used to authenticate into the server hosting the store|
-|StorePassword|The optional password used to secure the certificate store being managed|
+|ServerUsername|The user id that will be used to authenticate to the Signum API endpoints|
+|ServerPassword|The password that will be used to authenticate to the Signum API endpoints|
   
 
 It is not necessary to use a PAM Provider for all of the secrets available above. If a PAM Provider should not be used, simply enter in the actual value to be used, as normal.
