@@ -1,4 +1,4 @@
-# Integration Template
+# Signum
 
 The Signum Orchestrator Extension allows for the Inventorying of Signum private certificates.  Discovery, Managment, and ReEnrollment are NOT supported in this integration.  A Signum instance must be installed to use this integration along with the ability to consume Signum SOAP-based API endpoints using basic authentication.
 
@@ -14,9 +14,9 @@ The Universal Orchestrator is part of the Keyfactor software distribution and is
 The Universal Orchestrator is the successor to the Windows Orchestrator. This Orchestrator Extension plugin only works with the Universal Orchestrator and does not work with the Windows Orchestrator.
 
 
-## Support for Integration Template
+## Support for Signum
 
-Integration Template is open source and community supported, meaning that there is **no SLA** applicable for these tools.
+Signum is open source and community supported, meaning that there is **no SLA** applicable for these tools.
 
 ###### To report a problem or suggest a new feature, use the **[Issues](../../issues)** tab. If you want to contribute actual bug fixes or proposed enhancements, use the **[Pull requests](../../pulls)** tab.
 
