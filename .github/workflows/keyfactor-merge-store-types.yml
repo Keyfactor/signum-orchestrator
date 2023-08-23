@@ -1,5 +1,5 @@
 name: Keyfactor Merge Cert Store Types
-on: [workflow_dispatch]
+on: [workflow_dispatch] 
 
 jobs:
   get-manifest-properties:
