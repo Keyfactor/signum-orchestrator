@@ -31,7 +31,7 @@ Below are the values you need to enter if you choose to manually create the Sign
 
 *Advanced Tab:*  
 - **Store Path Type** - Fixed (with a value of NA underneath to represent "not applicable")
-- **Supports Custom Alias** - Forbidden
+- **Supports Custom Alias** - Required
 - **Private Key Handling** - Required
 - **PFX Password Style** - Default  
 

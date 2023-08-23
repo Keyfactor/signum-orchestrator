@@ -55,7 +55,7 @@
           "ServerRequired": true,
           "PowerShell": false,
           "BlueprintAllowed": false,
-          "CustomAliasAllowed": "Forbidden"
+          "CustomAliasAllowed": "Required"
         }
       ]
     }
