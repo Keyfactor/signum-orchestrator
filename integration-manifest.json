@@ -1,7 +1,7 @@
 {
   "$schema": "https://keyfactor.github.io/integration-manifest-schema.json",
   "integration_type": "orchestrator",
-  "name": "Signum",
+  "name": "Signum Orchestrator Extension",
   "status": "prototype",
   "support_level": "community",
   "description": "The Signum Orchestrator Extension allows for the Inventorying of Signum private certificates.  Discovery, Managment, and ReEnrollment are NOT supported in this integration.  A Signum instance must be installed to use this integration along with the ability to consume Signum SOAP-based API endpoints using basic authentication.",
