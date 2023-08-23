@@ -3,7 +3,7 @@
   "integration_type": "orchestrator",
   "name": "Signum Orchestrator Extension",
   "status": "prototype",
-  "support_level": "community",
+  "support_level": "kf-supported",
   "description": "The Signum Orchestrator Extension allows for the Inventorying of Signum private certificates.  Discovery, Managment, and ReEnrollment are NOT supported in this integration.  A Signum instance must be installed to use this integration along with the ability to consume Signum SOAP-based API endpoints using basic authentication.",
   "link_github": false,
   "update_catalog": false,
