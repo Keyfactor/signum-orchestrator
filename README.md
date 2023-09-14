@@ -99,7 +99,7 @@ This text would be entered in as the value for the __Server Password__, instead 
 ---
 
 
-﻿<!-- add integration specific information below -->
+<!-- add integration specific information below -->
 ## Versioning
 
 The version number of a the Signum Orchestrator Extension can be verified by right clicking on the Signum.dll file in the Extensions/Signum installation folder, selecting Properties, and then clicking on the Details tab.
@@ -150,4 +150,7 @@ To create a Keyfactor Command certificate store of certificate store type Signum
 - Client Machine - The URL that will be used as the base URL for Signum endpoint calls.  Should be something like https://{base url for your signum install}:8888/rtadminservice.svc/basic.  The port number of 8888 is a convention that is generally followed in Signum installations, but yours may vary.  The "/basic" at the end is required, as this integration makes use of Basic Authentication only when consuming the Signum SOAP API library.
 - Store Path - Not used and hardcoded to NA for "not applicable"
 - Server Username and Server Password - The id/password credentials that have authorization to execute Signum SOAP endpoints in your Signum environment.
+### License
+[Apache](https://apache.org/licenses/LICENSE-2.0)
+
 
