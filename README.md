@@ -2,7 +2,7 @@
 
 The Signum Orchestrator Extension allows for the Inventorying of Signum private certificates.  Discovery, Managment, and ReEnrollment are NOT supported in this integration.  A Signum instance must be installed to use this integration along with the ability to consume Signum SOAP-based API endpoints using basic authentication.
 
-#### Integration status: Prototype - Demonstration quality. Not for use in customer environments.
+#### Integration status: Production - Ready for use in production environments.
 
 
 ## About the Keyfactor Universal Orchestrator Extension
