@@ -1,0 +1,10 @@
+{
+  "extensions": {
+    "Keyfactor.Orchestrators.Extensions.IOrchestratorJobExtension": {
+      "CertStores.Signum.Inventory": {
+        "assemblypath": "Signum.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrator.Signum.Inventory"
+      }
+    }
+  }
+}
