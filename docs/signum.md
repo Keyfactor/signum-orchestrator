@@ -149,8 +149,8 @@ The following table describes the required and optional fields for the `Signum` 
 | --------- | ----------- | ------------------------- |
 | Category | Select "Signum" or the customized certificate store name from the previous step. | |
 | Container | Optional container to associate certificate store with. | |
-| Client Machine | For the Client Machine field, enter the base URL used for Signum endpoint calls, formatted as 'https://{base url for your signum install}:8888/rtadminservice.svc/basic'. The port number is generally 8888, but it may vary depending on your Signum configuration. | |
-| Store Path | For the Store Path field, enter 'NA' as it is hardcoded to represent 'not applicable' for Signum Certificate Stores. | |
+| Client Machine | The URL that will be used as the base URL for Signum endpoint calls, formatted as https://{base-url-for-signum-install}:8888/rtadminservice.svc/basic. | |
+| Store Path | The value 'NA' to indicate that the Store Path is not applicable for the Signum certificate store type. | |
 | Orchestrator | Select an approved orchestrator capable of managing `Signum` certificates. Specifically, one with the `Signum` capability. | |
 
 * **Using kfutil**
