@@ -107,8 +107,8 @@ To use the Signum Universal Orchestrator extension, you **must** create the Sign
 
     | Name | Display Name | Description | Type | Default Value/Options | Required |
     | ---- | ------------ | ---- | --------------------- | -------- | ----------- |
-    | ServerUsername | Server Username | The user ID (or PAM key pointing to the user ID) to use with authorization to execute Signum SOAP endpoints in your Signum environment. | Secret |  | 🔲 Unchecked |
-    | ServerPassword | Server Password | The password (or PAM key pointing to the password) for the user ID you entered for Server User Name. | Secret |  | 🔲 Unchecked |
+    | ServerUsername | Server Username | The user ID (or PAM key pointing to the user ID) to use with authorization to execute Signum SOAP endpoints in your Signum environment. | Secret |  | ✅ Checked |
+    | ServerPassword | Server Password | The password (or PAM key pointing to the password) for the user ID you entered for Server User Name. | Secret |  | ✅ Checked |
 
     The Custom Fields tab should look like this:
 
