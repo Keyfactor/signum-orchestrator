@@ -38,7 +38,7 @@
               "Type": "Secret",
               "DependsOn": "",
               "DefaultValue": "",
-              "Required": false,
+              "Required": true,
               "IsPAMEligible": true,
               "Description": "The user ID (or PAM key pointing to the user ID) to use with authorization to execute Signum SOAP endpoints in your Signum environment."
             },
@@ -48,7 +48,7 @@
               "Type": "Secret",
               "DependsOn": "",
               "DefaultValue": "",
-              "Required": false,
+              "Required": true,
               "IsPAMEligible": true,
               "Description": "The password (or PAM key pointing to the password) for the user ID you entered for Server User Name."
             }
