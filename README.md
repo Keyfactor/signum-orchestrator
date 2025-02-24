@@ -31,22 +31,16 @@
 
 ## Overview
 
-TODO Overview is a required section
+The Signum Orchestrator Extension supports inventorying certificate stored in a Signum instance.  Adding, renewing existing and removing certificates is not supported.
 
 
-
-### Signum
-TODO Global Store Type Section is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
-
-
-TODO Overview is a required section
 
 ## Compatibility
 
 This integration is compatible with Keyfactor Universal Orchestrator version 10.4.1 and later.
 
 ## Support
-The Signum Universal Orchestrator extension is supported by Keyfactor for Keyfactor customers. If you have a support issue, please open a support ticket with your Keyfactor representative. If you have a support issue, please open a support ticket via the Keyfactor Support Portal at https://support.keyfactor.com. 
+The Signum Universal Orchestrator extension If you have a support issue, please open a support ticket by either contacting your Keyfactor representative or via the Keyfactor Support Portal at https://support.keyfactor.com. 
  
 > To report a problem or suggest a new feature, use the **[Issues](../../issues)** tab. If you want to contribute actual bug fixes or proposed enhancements, use the **[Pull requests](../../pulls)** tab.
 
@@ -55,14 +49,6 @@ The Signum Universal Orchestrator extension is supported by Keyfactor for Keyfac
 Before installing the Signum Universal Orchestrator extension, we recommend that you install [kfutil](https://github.com/Keyfactor/kfutil). Kfutil is a command-line tool that simplifies the process of creating store types, installing extensions, and instantiating certificate stores in Keyfactor Command.
 
 
-TODO Requirements is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
-
-### Signum Requirements
-TODO Global Store Type Section is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
-
-
-TODO Requirements is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
-
 
 
 
@@ -70,8 +56,6 @@ TODO Requirements is an optional section. If this section doesn't seem necessary
 
 To use the Signum Universal Orchestrator extension, you **must** create the Signum Certificate Store Type. This only needs to happen _once_ per Keyfactor Command instance.
 
-
-TODO Global Store Type Section is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
 
 
 * **Create Signum using kfutil**:
@@ -123,6 +107,8 @@ TODO Global Store Type Section is an optional section. If this section doesn't s
 
     | Name | Display Name | Description | Type | Default Value/Options | Required |
     | ---- | ------------ | ---- | --------------------- | -------- | ----------- |
+    | ServerUsername | Server Username | The user ID (or PAM key pointing to the user ID) to use with authorization to execute Signum SOAP endpoints in your Signum environment. | Secret |  | ✅ Checked |
+    | ServerPassword | Server Password | The password (or PAM key pointing to the password) for the user ID you entered for Server User Name. | Secret |  | ✅ Checked |
 
     The Custom Fields tab should look like this:
 
@@ -166,36 +152,109 @@ TODO Global Store Type Section is an optional section. If this section doesn't s
     Refer to [Starting/Restarting the Universal Orchestrator service](https://software.keyfactor.com/Core-OnPrem/Current/Content/InstallingAgents/NetCoreOrchestrator/StarttheService.htm).
 
 
+6. **(optional) PAM Integration** 
+
+    The Signum Universal Orchestrator extension is compatible with all supported Keyfactor PAM extensions to resolve PAM-eligible secrets. PAM extensions running on Universal Orchestrators enable secure retrieval of secrets from a connected PAM provider.
+
+    To configure a PAM provider, [reference the Keyfactor Integration Catalog](https://keyfactor.github.io/integrations-catalog/content/pam) to select an extension, and follow the associated instructions to install it on the Universal Orchestrator (remote).
+
 
 > The above installation steps can be supplimented by the [official Command documentation](https://software.keyfactor.com/Core-OnPrem/Current/Content/InstallingAgents/NetCoreOrchestrator/CustomExtensions.htm?Highlight=extensions).
 
-
-## Post Installation
-
-TODO Post Installation is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
 
 
 ## Defining Certificate Stores
 
 
-TODO Global Store Type Section is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
 
-TODO Certificate Store Configuration is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
+* **Manually with the Command UI**
+
+    <details><summary>Create Certificate Stores manually in the UI</summary>
+
+    1. **Navigate to the _Certificate Stores_ page in Keyfactor Command.**
+
+        Log into Keyfactor Command, toggle the _Locations_ dropdown, and click _Certificate Stores_.
+
+    2. **Add a Certificate Store.**
+
+        Click the Add button to add a new Certificate Store. Use the table below to populate the **Attributes** in the **Add** form.
+        | Attribute | Description |
+        | --------- | ----------- |
+        | Category | Select "Signum" or the customized certificate store name from the previous step. |
+        | Container | Optional container to associate certificate store with. |
+        | Client Machine | The URL that will be used as the base URL for Signum endpoint calls. Should be something like https://{base url for your signum install}/rtadminservice.svc/basic. The API service port can be configured so yours may use something other than default https/443. The '/basic' at the end is required, as this integration makes use of Basic Authentication only when consuming the Signum SOAP API library. |
+        | Store Path | Not used and hardcoded to NA for 'not applicable' |
+        | Orchestrator | Select an approved orchestrator capable of managing `Signum` certificates. Specifically, one with the `Signum` capability. |
+        | ServerUsername | The user ID (or PAM key pointing to the user ID) to use with authorization to execute Signum SOAP endpoints in your Signum environment. |
+        | ServerPassword | The password (or PAM key pointing to the password) for the user ID you entered for Server User Name. |
 
 
+        
+
+        <details><summary>Attributes eligible for retrieval by a PAM Provider on the Universal Orchestrator</summary>
+
+        If a PAM provider was installed _on the Universal Orchestrator_ in the [Installation](#Installation) section, the following parameters can be configured for retrieval _on the Universal Orchestrator_.
+        | Attribute | Description |
+        | --------- | ----------- |
+        | ServerUsername | The user ID (or PAM key pointing to the user ID) to use with authorization to execute Signum SOAP endpoints in your Signum environment. |
+        | ServerPassword | The password (or PAM key pointing to the password) for the user ID you entered for Server User Name. |
+
+
+        Please refer to the **Universal Orchestrator (remote)** usage section ([PAM providers on the Keyfactor Integration Catalog](https://keyfactor.github.io/integrations-catalog/content/pam)) for your selected PAM provider for instructions on how to load attributes orchestrator-side.
+
+        > Any secret can be rendered by a PAM provider _installed on the Keyfactor Command server_. The above parameters are specific to attributes that can be fetched by an installed PAM provider running on the Universal Orchestrator server itself. 
+        </details>
+        
+
+    </details>
+
+* **Using kfutil**
+    
+    <details><summary>Create Certificate Stores with kfutil</summary>
+    
+    1. **Generate a CSV template for the Signum certificate store**
+
+        ```shell
+        kfutil stores import generate-template --store-type-name Signum --outpath Signum.csv
+        ```
+    2. **Populate the generated CSV file**
+
+        Open the CSV file, and reference the table below to populate parameters for each **Attribute**.
+        | Attribute | Description |
+        | --------- | ----------- |
+        | Category | Select "Signum" or the customized certificate store name from the previous step. |
+        | Container | Optional container to associate certificate store with. |
+        | Client Machine | The URL that will be used as the base URL for Signum endpoint calls. Should be something like https://{base url for your signum install}/rtadminservice.svc/basic. The API service port can be configured so yours may use something other than default https/443. The '/basic' at the end is required, as this integration makes use of Basic Authentication only when consuming the Signum SOAP API library. |
+        | Store Path | Not used and hardcoded to NA for 'not applicable' |
+        | Orchestrator | Select an approved orchestrator capable of managing `Signum` certificates. Specifically, one with the `Signum` capability. |
+        | ServerUsername | The user ID (or PAM key pointing to the user ID) to use with authorization to execute Signum SOAP endpoints in your Signum environment. |
+        | ServerPassword | The password (or PAM key pointing to the password) for the user ID you entered for Server User Name. |
+
+
+        
+
+        <details><summary>Attributes eligible for retrieval by a PAM Provider on the Universal Orchestrator</summary>
+
+        If a PAM provider was installed _on the Universal Orchestrator_ in the [Installation](#Installation) section, the following parameters can be configured for retrieval _on the Universal Orchestrator_.
+        | Attribute | Description |
+        | --------- | ----------- |
+        | ServerUsername | The user ID (or PAM key pointing to the user ID) to use with authorization to execute Signum SOAP endpoints in your Signum environment. |
+        | ServerPassword | The password (or PAM key pointing to the password) for the user ID you entered for Server User Name. |
+
+
+        > Any secret can be rendered by a PAM provider _installed on the Keyfactor Command server_. The above parameters are specific to attributes that can be fetched by an installed PAM provider running on the Universal Orchestrator server itself. 
+        </details>
+        
+
+    3. **Import the CSV file to create the certificate stores** 
+
+        ```shell
+        kfutil stores import csv --store-type-name Signum --file Signum.csv
+        ```
+    </details>
 
 > The content in this section can be supplimented by the [official Command documentation](https://software.keyfactor.com/Core-OnPrem/Current/Content/ReferenceGuide/Certificate%20Stores.htm?Highlight=certificate%20store).
 
-
-## Discovering Certificate Stores with the Discovery Job
-TODO Discovery is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
-
-
-### Signum Discovery Job
-TODO Global Store Type Section is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
-
-
-TODO Discovery Job Configuration is an optional section. If this section doesn't seem necessary on initial glance, please delete it. Refer to the docs on [Confluence](https://keyfactor.atlassian.net/wiki/x/SAAyHg) for more info
 
 
 
