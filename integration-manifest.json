@@ -47,7 +47,7 @@
               "DisplayName": "Server Password",
               "Type": "Secret",
               "DependsOn": "",
-              "DefaultValue": "",
+              "DefaultValue": "", 
               "Required": true,
               "IsPAMEligible": true,
               "Description": "The password (or PAM key pointing to the password) for the user ID you entered for Server User Name."
